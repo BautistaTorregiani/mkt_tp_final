@@ -16,7 +16,20 @@ cols = [
     "order_id","order_date","channel_id","store_id","store_name","customer_id",
     "province_id","province_name",
     "subtotal","tax_amount","shipping_fee","total_amount","status"
+
+    
 ]
+
+
+numeric_cols = ["subtotal", "tax_amount", "shipping_fee", "total_amount"]
+
+for col in numeric_cols:
+    df[col] = (df[col].astype(str)
+                     .str.replace(",", ".", regex=False)
+                     .str.replace("[^0-9.\-]", "", regex=True)
+                     .astype(float)
+                     .round(2))
+
 df[cols].to_csv("dw/fact_order.csv", index=False)
 
 
