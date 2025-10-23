@@ -1,10 +1,8 @@
-# scripts/pipeline.py
-
-# Importar las funciones de cada etapa del ETL
+# Importo las funciones de cada etapa del ETL
 from scripts.extract.extract import extract_raw_data
 from scripts.load.load import load_data_to_dw
 
-# Importar TODAS las funciones de la carpeta 'transform'
+# Importo TODAS las funciones de la carpeta 'transform'
 from scripts.transform.build_dim_date import transform_dim_date
 from scripts.transform.build_dim_channel import transform_dim_channel
 from scripts.transform.build_dim_customer import transform_dim_customer
@@ -43,7 +41,7 @@ def run_etl_pipeline():
     dim_location = transform_dim_location(raw_data)
     dim_store = transform_dim_store(raw_data)
 
-    # Agrupar dimensiones en un diccionario para pasarlas a los hechos
+    # Agrupa dimensiones en un diccionario para pasarlas a los hechos
     transformed_dims = {
         'dim_date': dim_date,
         'dim_channel': dim_channel,
@@ -53,7 +51,7 @@ def run_etl_pipeline():
         'dim_store': dim_store
     }
     
-    # Transformar Tablas de Hechos
+    # Transforma Tablas de Hechos
     print("   -> Construyendo Tablas de Hechos...")
     fact_order = transform_fact_order(raw_data, transformed_dims)
     fact_order_item = transform_fact_order_item(raw_data, transformed_dims)
@@ -64,7 +62,7 @@ def run_etl_pipeline():
 
     print("--- ✅ Transformación Completada ---")
 
-    # Agrupar todos los DataFrames finales en un solo diccionario
+    # Agrupa todos los DataFrames finales en un solo diccionario
     final_data = {
         'dim_date': dim_date,
         'dim_channel': dim_channel,

@@ -8,12 +8,11 @@ def load_data_to_dw(transformed_data, dw_dir="dw"):
     """
     print("\n--- 🏁 Iniciando Etapa de Carga ---")
 
-    # 1. Preparar el directorio de destino
+    # 1. Prepara el directorio de destino
     dw_path = Path(dw_dir)
-    dw_path.mkdir(exist_ok=True) # Crea la carpeta /dw si no existe
+    dw_path.mkdir(exist_ok=True) 
 
-    # 2. Recorrer y guardar cada tabla
-    # Itera sobre cada par (nombre_de_tabla, dataframe) en el diccionario
+    # 2. Recorre y guardar cada tabla
     for table_name, df in transformed_data.items():
 
         # Crea la ruta completa del archivo de salida, ej: "dw/dim_customer.csv"
